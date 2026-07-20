@@ -1,0 +1,91 @@
+@import "tailwindcss";
+/* Scan the shared design system's built classes so Tailwind generates them. */
+@source "../node_modules/@nibras/ui/dist";
+
+/* Design tokens */
+@theme {
+  --color-canvas: #eff3f0;
+  --color-surface: #ffffff;
+  --color-ink: #171717;
+  --color-forest: #052e1b;
+  --color-muted: #6b7280;
+  --color-faint: #9ca3af;
+  --color-mist: #94a39a;
+  --color-haze: #b7c4bb;
+  --color-brand: #059669;
+  --color-brand-mid: #0b7a57;
+  --color-brand-strong: #047857;
+  --color-gain: #047857;
+  --color-mint: #6ee7b7;
+  --color-loss: #dc2626;
+  --color-warn: #d97706;
+  --color-warn-ink: #b45309;
+  --color-line: #e5e7eb;
+  --color-line-soft: #f1f4f2;
+  --color-hair: rgba(5, 46, 27, 0.08);
+}
+
+@theme inline {
+  --font-sans: var(--font-schibsted), system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
+}
+
+/* Surface primitives (@layer components so utilities override) */
+@layer components {
+  .nb-canvas {
+    background: linear-gradient(180deg, #eef3f0 0%, #e8eeea 100%);
+  }
+  .nb-panel {
+    border-radius: 18px;
+    border: 1px solid var(--color-hair);
+    background: var(--color-surface);
+    box-shadow: 0 2px 8px -2px rgba(5, 46, 27, 0.08);
+  }
+  .nb-beacon {
+    background: radial-gradient(130% 150% at 12% -10%, #0c6549 0%, #064e37 46%, #052e1b 100%);
+    box-shadow: 0 24px 60px -24px rgba(5, 46, 27, 0.6);
+  }
+  .nb-cardface {
+    background: linear-gradient(135deg, #0b7a57 0%, #075b41 52%, #052e1b 100%);
+  }
+  .nb-account-hero {
+    background: linear-gradient(120deg, #0c6549, #052e1b);
+    box-shadow: 0 20px 50px -22px rgba(5, 46, 27, 0.55);
+  }
+  .nb-guilloche {
+    background: repeating-radial-gradient(circle at center, rgba(255, 255, 255, 0.055) 0 1px, transparent 1px 20px);
+  }
+  .nb-weave {
+    background: repeating-linear-gradient(58deg, rgba(255, 255, 255, 0.04) 0 2px, transparent 2px 9px);
+  }
+}
+
+body {
+  background: var(--color-canvas);
+  color: var(--color-ink);
+  font-family: var(--font-schibsted), system-ui, sans-serif;
+}
+
+/* Keyframes */
+@keyframes nbPulse{0%{box-shadow:0 0 0 0 rgba(5,150,105,.45)}70%{box-shadow:0 0 0 7px rgba(5,150,105,0)}100%{box-shadow:0 0 0 0 rgba(5,150,105,0)}}
+@keyframes nbPulseAmber{0%{box-shadow:0 0 0 0 rgba(217,119,6,.45)}70%{box-shadow:0 0 0 7px rgba(217,119,6,0)}100%{box-shadow:0 0 0 0 rgba(217,119,6,0)}}
+@keyframes nbProbe{0%{top:0;opacity:0}12%{opacity:1}88%{opacity:1}100%{top:calc(100% - 5px);opacity:0}}
+@keyframes nbBar{0%,100%{transform:scaleY(.35)}50%{transform:scaleY(1)}}
+@keyframes nbBlink{0%,100%{opacity:1}50%{opacity:.25}}
+@keyframes nbCursor{0%,49%{opacity:1}50%,100%{opacity:0}}
+@keyframes nbLog{0%{transform:translateY(0)}100%{transform:translateY(-50%)}}
+@keyframes nbRing{0%{transform:scale(.55);opacity:.6}100%{transform:scale(1.5);opacity:0}}
+@keyframes nbSweep{0%{transform:translateX(-140%) skewX(-16deg)}60%,100%{transform:translateX(360%) skewX(-16deg)}}
+@keyframes nbFloat{0%,100%{transform:translateY(0) rotate(-1.2deg)}50%{transform:translateY(-7px) rotate(-1.2deg)}}
+@keyframes nbGlow{0%,100%{opacity:.5}50%{opacity:.95}}
+@keyframes nbDrawline{from{stroke-dashoffset:640}to{stroke-dashoffset:0}}
+@keyframes nbSpin{to{transform:rotate(360deg)}}
+@keyframes nbShimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
